@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AngularFirestore } from 'angularfire2/firestore';
-import { FirebaseService, Etape } from '../FirebaseService';
+import { FirebaseService, Etape, Histoire } from '../FirebaseService';
 
 import { ToastController } from '@ionic/angular';
 import { stringify } from 'querystring';
@@ -14,32 +14,43 @@ import { stringify } from 'querystring';
 export class CreationPage implements OnInit {
 
   public titreHistoire: string;
-  public nombreEtapes: number;
+  public nombreEtapes: number = 0;
   firebaseService: FirebaseService = new FirebaseService(this.afs);
   public listeEtapes: Etape[] = [];
-  public etape1: boolean;
-  public etape2: boolean;
-  public etape3: boolean;
+  public etapesExistent: boolean;
   public etapeTest: Etape;
+  public nomEtape: string;
+  public lieuEtape: string;
 
-  termine1(){
-    for(let i = 1;i<=this.nombreEtapes;i++){
-      this.etapeTest = new Etape();
-      this.etapeTest.lieu = "test";
-      this.etapeTest.nom = "testNom";
-      this.listeEtapes.push(this.etapeTest);
+  public histoires_recues : Histoire[];
+  public titre1:string = "";
+
+
+
+
+  ajouterEtape() {
+    if(this.listeEtapes.length==0){
+      this.etapesExistent = true;
     }
-    this.etape1=false;
-    this.etape2=true;
+
+    this.etapeTest = new Etape();
+    this.listeEtapes.push(this.etapeTest);
   }
 
-  arrayOne(): any[] {
-    return Array(this.nombreEtapes);
+  validerEtape(i:number) {
+    this.listeEtapes[i].lieu=this.lieuEtape;
+    this.listeEtapes[i].nom=this.nomEtape;
+    this.nombreEtapes++;
   }
 
 
   createHistoire() {
-    this.firebaseService.nouvelleHistoire(this.titreHistoire, this.nombreEtapes, this.listeEtapes)
+
+    let i = this.listeEtapes.length;
+    this.listeEtapes[i-1].lieu=this.lieuEtape;
+    this.listeEtapes[i-1].nom=this.nomEtape;
+
+    this.firebaseService.nouvelleHistoire(this.titreHistoire.toString(), this.nombreEtapes, this.listeEtapes)
       .then(async res => {
         let toast = await this.toastController.create({
           message: 'Vous avez bien créé votre histoire. Félicitations.',
@@ -52,18 +63,23 @@ export class CreationPage implements OnInit {
       })
   }
 
+  async afficherHistoires(){
+    this.histoires_recues = await this.firebaseService.lireHistoires();
+    this.titre1 = this.histoires_recues[0].titre;
+  }
+
   resetFields() {
     this.titreHistoire = "";
-    this.nombreEtapes = null;
+    this.nombreEtapes = 0;
+    this.listeEtapes = [];
+    this.etapesExistent = false;
   }
 
   constructor(
     private afs: AngularFirestore,
     public toastController: ToastController
   ) {
-    this.etape1 = true;
-    this.etape2 = false;
-    this.etape3 = false;
+    this.etapesExistent = false;
 
   }
 

@@ -48,17 +48,17 @@ export class ScanPage implements OnInit {
             this.scanTermine = true;
 
             if(text == "2"){
-              this.indice = "Grille-pain.";
+              this.indice = "Baby-foot.";
               this._appService.add(this.indice);
             }
 
             if(text == "1"){
-              this.indice = "Ordinateur de la chambre.";
+              this.indice = "Ordinateur de la I03.";
               this._appService.add(this.indice);
             }
 
             if(text == "3"){
-              this.indice = "Poche arrière de Roxane.";
+              this.indice = "Kfet.";
               this._appService.add(this.indice);
             }
 

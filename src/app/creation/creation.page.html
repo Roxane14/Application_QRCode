@@ -9,29 +9,33 @@
       <ion-content>
         <ion-list>
           <ion-item>
-            <ion-icon name="clipboard" slot="start"></ion-icon>
+            <ion-icon name="home" slot="start"></ion-icon>
             <ion-label [routerLink]="['/home']">Accueil</ion-label>
           </ion-item>
           <ion-item>
-            <ion-icon name="book" slot="start"></ion-icon>
+            <ion-icon name="square-outline" slot="start"></ion-icon>
             <ion-label [routerLink]="['/scan']">Scanner un QRCode</ion-label>
           </ion-item>
           <ion-item>
-            <ion-icon name="compass" slot="start"></ion-icon>
+            <ion-icon name="search" slot="start"></ion-icon>
             <ion-label [routerLink]="['/indices']">Voir tous mes indices</ion-label>
           </ion-item>
           <ion-item>
-            <ion-icon name="compass" slot="start"></ion-icon>
+            <ion-icon name="create" slot="start"></ion-icon>
             <ion-label [routerLink]="['/generation']">Nouveau QRCode</ion-label>
           </ion-item>
-          <ion-item>
+          <!--<ion-item>
             <ion-icon name="compass" slot="start"></ion-icon>
             <ion-label [routerLink]="['/test-menu']">Test Menu</ion-label>
-          </ion-item>
+          </ion-item>-->
           <ion-item>
-            <ion-icon name="compass" slot="start"></ion-icon>
+            <ion-icon name="bulb" slot="start"></ion-icon>
             <ion-label [routerLink]="['/creation']">Création d'histoire</ion-label>
           </ion-item>
+          <!--<ion-item>
+            <ion-icon name="compass" slot="start"></ion-icon>
+            <ion-label [routerLink]="['/jouer']">Choisir une histoire</ion-label>
+          </ion-item>-->
         </ion-list>
       </ion-content>
     </ion-menu>
@@ -50,11 +54,8 @@
 
       <ion-content class="ion-padding">
 
-        <p>Vous êtes ici pour créer une histoire</p>
+        <ion-title>Votre nouvelle histoire :</ion-title>
 
-        <div [ngClass]="{'divEnCours': etape1, 'divTermine':etape3, 'divTermine':etape2}">
-
-          <ion-title>Étape 1</ion-title>
 
 
           <ion-item lines="none">
@@ -62,61 +63,49 @@
             <ion-input [(ngModel)]="titreHistoire" placeholder="Entrez le titre"></ion-input>
           </ion-item>
 
-          <ion-item lines="none">
-            <ion-label><b>Nombre d'étapes :</b></ion-label>
-            <ion-input [(ngModel)]="nombreEtapes" placeholder="Entrez le nombre"></ion-input>
-          </ion-item>
-
-          <ion-button color="tertiary" expand="block" (click)="termine1()">
-            <ion-icon slot="start" name="arrow-forward"></ion-icon>
-            Étape suivante
-          </ion-button>
-
-        </div>
-        <br>
-        <br>
-
-        <div *ngIf="!etape1" [ngClass]="{'divEnCours': etape2, 'divTermine':etape3}">
 
           <ion-card *ngFor="let item of listeEtapes; let i = index;">
-            
-            {{i}}
+            <ion-card-title>Étape numéro {{i+1}} :</ion-card-title>
 
-            bonjour
+            <ion-item lines="none">
+              <ion-label><b>Nom de l'étape :</b></ion-label>
+              <ion-input [(ngModel)]="nomEtape" placeholder="Entrez le nom"></ion-input>
+            </ion-item>
+  
+            <ion-item lines="none">
+              <ion-label><b>Lieu :</b></ion-label>
+              <ion-input [(ngModel)]="lieuEtape" placeholder="Entrez le lieu"></ion-input>
+            </ion-item>
 
+            <ion-button color="tertiary" expand="block" (click)="validerEtape(i)">
+              <ion-icon slot="start" name="checkmark"></ion-icon>
+              Valider cette étape
+            </ion-button>
 
           </ion-card>
 
-          <ion-button color="tertiary" expand="block" (click)="createHistoire()">
-            <ion-icon slot="start" name="create"></ion-icon>
-            Créer mon histoire
+          <ion-button color="tertiary" expand="block" (click)="ajouterEtape()">
+            <ion-icon slot="start" name="add"></ion-icon>
+            Ajouter une étape
           </ion-button>
 
-        </div>
-
-        <div *ngIf="etape3">
-
-
-          <ion-item lines="none">
-            <ion-label><b>Titre de l'histoire :</b></ion-label>
-            <ion-input [(ngModel)]="titreHistoire" placeholder="Entrez le titre"></ion-input>
-          </ion-item>
-
-          <ion-item lines="none">
-            <ion-label><b>Nombre d'étapes :</b></ion-label>
-            <ion-input [(ngModel)]="nombreEtapes" placeholder="Entrez le nombre"></ion-input>
-          </ion-item>
-
-          <ion-button color="tertiary" expand="block" (click)="createHistoire()">
-            <ion-icon slot="start" name="create"></ion-icon>
-            Créer mon histoire
+          <ion-button color="tertiary" expand="block" (click)="createHistoire()" *ngIf="etapesExistent">
+            <ion-icon slot="start" name="checkmark-circle"></ion-icon>
+            Valider l'histoire complète
           </ion-button>
 
-          <ion-card *ngFor="let etape of listeEtapes">
-            bonjour
+          <ion-button color="tertiary" expand="block" (click)="afficherHistoires()">
+            <ion-icon slot="start" name="checkmark-circle"></ion-icon>
+            Afficher toutes les histoires :
+          </ion-button>
+
+
+          <ion-card *ngFor="let item of histoires_recues; let i = index;">
+            <ion-card-title>Histoire numéro {{i+1}}</ion-card-title>
+            {{item.titre}}
           </ion-card>
 
-        </div>
+
 
 
 

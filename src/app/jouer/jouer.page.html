@@ -47,7 +47,7 @@
             <ion-menu-button></ion-menu-button>
           </ion-buttons>
           <ion-title class="titre-page">
-            Mon application
+            Choisir une histoire
           </ion-title>
         </ion-toolbar>
       </ion-header>
@@ -55,32 +55,13 @@
       <ion-content class="ion-padding">
 
 
-        <div>
-
-
-          <ion-item lines="none">
-            <ion-label><b>Texte à encoder:</b></ion-label>
-            <ion-input [(ngModel)]="textToCode" placeholder="Entrez votre URL"></ion-input>
-          </ion-item>
-
-          <ion-button color="tertiary" expand="block" (click)="createQRCode()">
-            <ion-icon slot="start" name="create"></ion-icon>
-            Créer un QR Code
-          </ion-button>
-
-          <div class="center" *ngIf="myAngularxQrCode">
-            <qrcode [qrdata]="myAngularxQrCode" [size]="250" [level]="'M'"></qrcode>
-          </div>
-
-        </div>
-
       </ion-content>
     </div>
   </ion-app>
 
   <script>
     async function openMenu() {
-      await menuController.open();
+      await menuController.toggle();
     }
   </script>
 </body>
