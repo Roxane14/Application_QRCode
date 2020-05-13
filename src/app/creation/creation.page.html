@@ -50,17 +50,73 @@
 
       <ion-content class="ion-padding">
 
-        <form (ngSubmit)="logForm()">
-          <ion-item>
-            <ion-label>Todo</ion-label>
-            <ion-input type="text" [(ngModel)]="todo.title" name="title"></ion-input>
+        <p>Vous êtes ici pour créer une histoire</p>
+
+        <div [ngClass]="{'divEnCours': etape1, 'divTermine':etape3, 'divTermine':etape2}">
+
+          <ion-title>Étape 1</ion-title>
+
+
+          <ion-item lines="none">
+            <ion-label><b>Titre de l'histoire :</b></ion-label>
+            <ion-input [(ngModel)]="titreHistoire" placeholder="Entrez le titre"></ion-input>
           </ion-item>
-          <ion-item>
-            <ion-label>Description</ion-label>
-            <ion-textarea [(ngModel)]="todo.description" name="description"></ion-textarea>
+
+          <ion-item lines="none">
+            <ion-label><b>Nombre d'étapes :</b></ion-label>
+            <ion-input [(ngModel)]="nombreEtapes" placeholder="Entrez le nombre"></ion-input>
           </ion-item>
-          <button ion-button type="submit" block>Add Todo</button>
-        </form>
+
+          <ion-button color="tertiary" expand="block" (click)="termine1()">
+            <ion-icon slot="start" name="arrow-forward"></ion-icon>
+            Étape suivante
+          </ion-button>
+
+        </div>
+        <br>
+        <br>
+
+        <div *ngIf="!etape1" [ngClass]="{'divEnCours': etape2, 'divTermine':etape3}">
+
+          <ion-card *ngFor="let item of listeEtapes; let i = index;">
+            
+            {{i}}
+
+            bonjour
+
+
+          </ion-card>
+
+          <ion-button color="tertiary" expand="block" (click)="createHistoire()">
+            <ion-icon slot="start" name="create"></ion-icon>
+            Créer mon histoire
+          </ion-button>
+
+        </div>
+
+        <div *ngIf="etape3">
+
+
+          <ion-item lines="none">
+            <ion-label><b>Titre de l'histoire :</b></ion-label>
+            <ion-input [(ngModel)]="titreHistoire" placeholder="Entrez le titre"></ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label><b>Nombre d'étapes :</b></ion-label>
+            <ion-input [(ngModel)]="nombreEtapes" placeholder="Entrez le nombre"></ion-input>
+          </ion-item>
+
+          <ion-button color="tertiary" expand="block" (click)="createHistoire()">
+            <ion-icon slot="start" name="create"></ion-icon>
+            Créer mon histoire
+          </ion-button>
+
+          <ion-card *ngFor="let etape of listeEtapes">
+            bonjour
+          </ion-card>
+
+        </div>
 
 
 
