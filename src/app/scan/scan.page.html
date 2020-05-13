@@ -1,0 +1,76 @@
+<body>
+  <ion-app>
+    <ion-menu side="start" content-id="main-content">
+      <ion-header>
+        <ion-toolbar translucent>
+          <ion-title>Menu</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-list>
+          <ion-item>
+            <ion-icon name="clipboard" slot="start"></ion-icon>
+            <ion-label [routerLink]="['/home']">Accueil</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="book" slot="start"></ion-icon>
+            <ion-label [routerLink]="['/scan']">Scanner un QRCode</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="compass" slot="start"></ion-icon>
+            <ion-label [routerLink]="['/indices']">Voir tous mes indices</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="compass" slot="start"></ion-icon>
+            <ion-label [routerLink]="['/generation']">Nouveau QRCode</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="compass" slot="start"></ion-icon>
+            <ion-label [routerLink]="['/creation']">Création d'histoire</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+
+    <div class="ion-page" id="main-content">
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <ion-title class="titre-page">SCAN</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="closeCamera()">
+              <ion-icon name="close"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-button (click)="scanCode()">
+        Nouveau scan
+      </ion-button>
+
+      <ion-content class="ion-padding">
+        <ion-icon name="square-outline" class="frame" [ngClass]="{'frameGreen': scanTermine, 'framePink':!scanTermine}"></ion-icon>
+      </ion-content>
+
+      <ion-button (click)="closeCamera()">
+        Ouvrir le QRCode
+      </ion-button>
+
+      <ion-item *ngIf="scanTermine">
+        <ion-label>
+          <p>Nouvel indice trouvé :</p>
+          <h2><b>{{ indice }}</b></h2>
+        </ion-label>
+      </ion-item>
+    </div>
+  </ion-app>
+
+  <script>
+    async function openMenu() {
+      await menuController.open();
+    }
+  </script>
+</body>

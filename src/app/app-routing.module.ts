@@ -11,6 +11,26 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'scan',
+    loadChildren: () => import('./scan/scan.module').then( m => m.ScanPageModule)
+  },
+  {
+    path: 'generation',
+    loadChildren: () => import('./generation/generation.module').then( m => m.GenerationPageModule)
+  },
+  {
+    path: 'indices',
+    loadChildren: () => import('./indices/indices.module').then( m => m.IndicesPageModule)
+  },
+  {
+    path: 'test-menu',
+    loadChildren: () => import('./test-menu/test-menu.module').then( m => m.TestMenuPageModule)
+  },
+  {
+    path: 'creation',
+    loadChildren: () => import('./creation/creation.module').then( m => m.CreationPageModule)
+  },
 ];
 
 @NgModule({

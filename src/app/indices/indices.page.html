@@ -1,0 +1,61 @@
+<body>
+  <ion-app>
+    <ion-menu side="start" content-id="main-content">
+      <ion-header>
+        <ion-toolbar translucent>
+          <ion-title>Menu</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-list>
+          <ion-item>
+            <ion-icon name="clipboard" slot="start"></ion-icon>
+            <ion-label [routerLink]="['/home']">Accueil</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="book" slot="start"></ion-icon>
+            <ion-label [routerLink]="['/scan']">Scanner un QRCode</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="compass" slot="start"></ion-icon>
+            <ion-label [routerLink]="['/indices']">Voir tous mes indices</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="compass" slot="start"></ion-icon>
+            <ion-label [routerLink]="['/generation']">Nouveau QRCode</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="compass" slot="start"></ion-icon>
+            <ion-label [routerLink]="['/creation']">Création d'histoire</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+
+    <div class="ion-page" id="main-content">
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <ion-title class="titre-page">INDICES</ion-title>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content>
+        <p>Voici la liste de vos indices :</p>
+        <ion-card *ngFor="let indice of tableauIndices">
+          <ion-card-title>{{indice}}</ion-card-title>
+        </ion-card>
+      </ion-content>
+
+
+    </div>
+  </ion-app>
+
+  <script>
+    async function openMenu() {
+      await menuController.open();
+    }
+  </script>
+</body>
