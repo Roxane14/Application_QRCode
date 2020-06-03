@@ -14,8 +14,8 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 })
 export class AppComponent {
 
-  monTexte : string;
-  value:string="";
+  /*monTexte : string;
+  value:string="";*/
 
   constructor(
     private platform: Platform,
@@ -27,7 +27,7 @@ export class AppComponent {
   }
 
   ngOnInit():void{
-    this.value=this._appService.getApp();
+    //this.value=this._appService.getApp();
 
   }
 

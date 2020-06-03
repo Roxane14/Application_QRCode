@@ -29,28 +29,11 @@ export class HomePage {
     private afs:AngularFirestore, 
     public toastController: ToastController
   ) {
-    this._appService.setApp("bonjour");
-    this.value=this._appService.getApp();
-    this.tableauIndices=this._appService.getTableau();
+    
   }
 
 
-  add(){
-    this.firebaseService.addUser()
-    .then( async res => {
-      let toast = await this.toastController.create({
-        message: 'Vous avez bien cliqué sur le bouton. Félicitations.',
-        duration: 3000
-      });
-      toast.present();
-      /*this.resetFields();*/
-    }, err => {
-      console.log(err)
-    })
-  }
-  /*resetFields() {
-    throw new Error("Method not implemented.");
-  }*/
+
 }
 
 

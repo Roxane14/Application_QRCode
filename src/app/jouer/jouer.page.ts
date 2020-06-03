@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FirebaseService, Histoire, Etape } from '../FirebaseService';
+import { AngularFirestore } from 'angularfire2/firestore';
+import { ToastController } from '@ionic/angular';
+import { appService } from '../app-service';
 
 @Component({
   selector: 'app-jouer',
@@ -7,7 +11,41 @@ import { Component, OnInit } from '@angular/core';
 })
 export class JouerPage implements OnInit {
 
-  constructor() { }
+  firebaseService: FirebaseService = new FirebaseService(this.afs);
+  public histoires_recues: Histoire[];
+  public titre1: string = "";
+  _appService = appService.getInstance();  
+  mesEtapes1:Etape[] =[];
+
+  constructor(
+    private afs: AngularFirestore,
+    public toastController: ToastController
+  ) {
+    this.afficherHistoires();
+  }
+
+  async afficherHistoires() {
+    this.histoires_recues = await this.firebaseService.lireHistoires();
+    //this.titre1 = this.histoires_recues[0].titre;
+  }
+
+  async choisirHistoire(i: number) {
+    let j=i+1;
+
+    console.log("Vous avez choisi l'histoire : " + j);
+    console.log(this.histoires_recues[i].titre);
+
+    this._appService.setEtapes(this.histoires_recues[i].etapes);
+
+    //console.log(this.mesEtapes1[0].nom);
+    
+    let toast = await this.toastController.create({
+      message: 'Vous avez bien choisi l\'histoire '+j+'. Félicitations.',
+      duration: 3000
+    });
+    toast.present();
+
+  }
 
   ngOnInit() {
   }

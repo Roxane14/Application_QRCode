@@ -44,13 +44,13 @@ export class CreationPage implements OnInit {
   }
 
 
-  createHistoire() {
+  async createHistoire() {
 
     let i = this.listeEtapes.length;
     this.listeEtapes[i-1].lieu=this.lieuEtape;
     this.listeEtapes[i-1].nom=this.nomEtape;
 
-    this.firebaseService.nouvelleHistoire(this.titreHistoire.toString(), this.nombreEtapes, this.listeEtapes)
+    await this.firebaseService.nouvelleHistoire(this.titreHistoire.toString(), this.nombreEtapes, this.listeEtapes)
       .then(async res => {
         let toast = await this.toastController.create({
           message: 'Vous avez bien créé votre histoire. Félicitations.',
