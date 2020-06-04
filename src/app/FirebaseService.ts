@@ -52,7 +52,8 @@ export class FirebaseService {
 
         this.afs.collection('/histoires/').doc(this.reference.toString()).collection('/etapes/').doc(i.toString()).set({
           Nom: etapes[i].nom,
-          Lieu: etapes[i].lieu
+          Lieu: etapes[i].lieu,
+          QrCode: i
         })
           .then(
             (res) => {
@@ -102,6 +103,8 @@ export class FirebaseService {
                     this.etape_tampon = new Etape();
                     this.etape_tampon.lieu = this.document.Lieu;
                     this.etape_tampon.nom = this.document.Nom;
+                    this.etape_tampon.qr = this.document.QrCode;
+
 
                     this.etapes_tampon.push(this.etape_tampon);
                   }
@@ -135,6 +138,7 @@ export class Etape {
   }
   nom: string;
   lieu: string;
+  qr:number;
 
 }
 

@@ -54,12 +54,6 @@
 
       <ion-content class="ion-padding">
 
-        <ion-button color="tertiary" expand="block" (click)="afficherHistoires()">
-          <ion-icon slot="start" name="checkmark-circle"></ion-icon>
-          Afficher toutes les histoires :
-        </ion-button>
-
-
         <ion-card *ngFor="let item of histoires_recues; let i = index;" (click)="choisirHistoire(i)">
           <ion-card-title>Histoire numéro {{i+1}}</ion-card-title>
           {{item.titre}}

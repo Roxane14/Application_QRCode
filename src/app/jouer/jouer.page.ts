@@ -13,7 +13,6 @@ export class JouerPage implements OnInit {
 
   firebaseService: FirebaseService = new FirebaseService(this.afs);
   public histoires_recues: Histoire[];
-  public titre1: string = "";
   _appService = appService.getInstance();  
   mesEtapes1:Etape[] =[];
 
@@ -26,7 +25,6 @@ export class JouerPage implements OnInit {
 
   async afficherHistoires() {
     this.histoires_recues = await this.firebaseService.lireHistoires();
-    //this.titre1 = this.histoires_recues[0].titre;
   }
 
   async choisirHistoire(i: number) {
@@ -37,7 +35,6 @@ export class JouerPage implements OnInit {
 
     this._appService.setEtapes(this.histoires_recues[i].etapes);
 
-    //console.log(this.mesEtapes1[0].nom);
     
     let toast = await this.toastController.create({
       message: 'Vous avez bien choisi l\'histoire '+j+'. Félicitations.',

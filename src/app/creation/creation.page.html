@@ -33,7 +33,7 @@
             <ion-label [routerLink]="['/creation']">Création d'histoire</ion-label>
           </ion-item>
           <ion-item>
-            <ion-icon name="compass" slot="start"></ion-icon>
+            <ion-icon name="book" slot="start"></ion-icon>
             <ion-label [routerLink]="['/jouer']">Choisir une histoire</ion-label>
           </ion-item>
         </ion-list>
@@ -68,13 +68,13 @@
             <ion-card-title>Étape numéro {{i+1}} :</ion-card-title>
 
             <ion-item lines="none">
-              <ion-label><b>Nom de l'étape :</b></ion-label>
-              <ion-input [(ngModel)]="nomEtape" placeholder="Entrez le nom"></ion-input>
-            </ion-item>
-  
-            <ion-item lines="none">
-              <ion-label><b>Lieu :</b></ion-label>
+              <ion-label><b>Lieu de l'indice :</b></ion-label>
               <ion-input [(ngModel)]="lieuEtape" placeholder="Entrez le lieu"></ion-input>
+            </ion-item>
+
+            <ion-item lines="none">
+              <ion-label><b>Contenu de l'indice :</b></ion-label>
+              <ion-input [(ngModel)]="nomEtape" placeholder="Entrez le contenu"></ion-input>
             </ion-item>
 
             <ion-button color="tertiary" expand="block" (click)="validerEtape(i)">
@@ -93,21 +93,6 @@
             <ion-icon slot="start" name="checkmark-circle"></ion-icon>
             Valider l'histoire complète
           </ion-button>
-
-          <ion-button color="tertiary" expand="block" (click)="afficherHistoires()">
-            <ion-icon slot="start" name="checkmark-circle"></ion-icon>
-            Afficher toutes les histoires :
-          </ion-button>
-
-
-          <ion-card *ngFor="let item of histoires_recues; let i = index;">
-            <ion-card-title>Histoire numéro {{i+1}}</ion-card-title>
-            {{item.titre}}
-          </ion-card>
-
-
-
-
 
       </ion-content>
     </div>

@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner/ngx';
 
 import { appService } from '../app-service';
+import { Etape } from '../FirebaseService';
 
 @Component({
   selector: 'app-scan',
   templateUrl: './scan.page.html',
   styleUrls: ['./scan.page.scss'],
-  providers:[appService]
+  providers: [appService]
 })
 export class ScanPage implements OnInit {
 
@@ -18,7 +19,10 @@ export class ScanPage implements OnInit {
   public textScanned: string = '';
 
   _appService = appService.getInstance();
-  public indice : string;
+  public indice: string;
+
+  public etapeSuivante: Etape;
+  public valide: Boolean = false;
 
   createQRCode() {
     this.myAngularxQrCode = this.textToCode;
@@ -26,63 +30,83 @@ export class ScanPage implements OnInit {
   }
 
   constructor(
-    private qrScanner: QRScanner
+    private qrScanner: QRScanner,
+    private ngZone: NgZone
   ) {
-    
     this.scanCode();
   }
 
   scanCode() {
-    this.closeCamera();
-    //this.showCamera = true;
-    this.qrScanner.prepare()
-      .then((status: QRScannerStatus) => {
-        if (status.authorized) {
-          // camera permission was granted
+    console.log("scan code");
+    this.etapeSuivante = this._appService.getEtapeSuivante();
 
-          // start scanning
-          console.log('Scan en cours...' + JSON.stringify(status));
-          const scanSub = this.qrScanner.scan().subscribe((text: string) => {
-            console.log('Scanned something', text);
-            this.textScanned = text;
-            this.scanTermine = true;
+    console.log("etape suivante : " + this.etapeSuivante);
 
-            if(text == "2"){
-              this.indice = "Baby-foot.";
-              this._appService.add(this.indice);
-            }
+    if (this.etapeSuivante == null) {
+      this.valide = false;
+    }
 
-            if(text == "1"){
-              this.indice = "Ordinateur de la I03.";
-              this._appService.add(this.indice);
-            }
+    else {
 
-            if(text == "3"){
-              this.indice = "Kfet.";
-              this._appService.add(this.indice);
-            }
+      this.ngZone.run(() => {
+        this.scanTermine = false;
+      });
 
-            this.closeCamera();
+      this.valide = true;
+      console.log("le qr code : " + this.etapeSuivante.qr);
+      console.log("l'indice : " + this.etapeSuivante.lieu);
+      //this.closeCamera();
 
-          });
+      this.qrScanner.hide(); // hide camera preview
+      //this.qrScanner.destroy();
 
-        } else if (status.denied) {
-          // camera permission was permanently denied
-          // you must use QRScanner.openSettings() method to guide the user to the settings page
-          // then they can grant the permission from there
-        } else {
-          // permission was denied, but not permanently. You can ask for permission again at a later time.
-        }
-      })
-      .catch((e: any) => console.log('Error is', e));
+      //this.showCamera = true;
+      this.qrScanner.prepare()
+        .then((status: QRScannerStatus) => {
+          if (status.authorized) {
+            // camera permission was granted
+
+            // start scanning
+            console.log('Scan en cours...' + JSON.stringify(status));
+            const scanSub = this.qrScanner.scan().subscribe((text: string) => {
+              console.log('Scanned something', text);
+              this.textScanned = text;
+
+
+              if (text == this.etapeSuivante.qr.toString()) {
+                this.indice = this.etapeSuivante.lieu;
+                this._appService.add(this.indice);
+              }
+
+              this.ngZone.run(() => {
+                this.scanTermine = true;
+              });
+
+              this.qrScanner.hide(); // hide camera preview
+              this.qrScanner.destroy();
+
+
+            });
+
+          } else if (status.denied) {
+            // camera permission was permanently denied
+            // you must use QRScanner.openSettings() method to guide the user to the settings page
+            // then they can grant the permission from there
+          } else {
+            // permission was denied, but not permanently. You can ask for permission again at a later time.
+          }
+        })
+        .catch((e: any) => console.log('Error is', e));
+    }
   }
 
-  closeCamera() {
-    this.qrScanner.hide(); // hide camera preview
-    this.qrScanner.destroy();
-  }
 
   ngOnInit() {
   }
+
+  ionViewWillEnter() {
+    this.scanCode();
+  }
+
 
 }
