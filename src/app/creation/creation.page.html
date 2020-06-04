@@ -54,7 +54,8 @@
 
       <ion-content class="ion-padding">
 
-        <ion-title>Votre nouvelle histoire :</ion-title>
+        <ion-card>
+          <ion-title>Votre nouvelle histoire :</ion-title>
 
 
 
@@ -93,6 +94,33 @@
             <ion-icon slot="start" name="checkmark-circle"></ion-icon>
             Valider l'histoire complète
           </ion-button>
+
+        </ion-card>
+
+
+        <ion-card>
+          <ion-title>Recevoir les QRcodes par mail :</ion-title>
+
+
+          <ion-item lines="none">
+            <ion-label><b>Votre adresse mail :</b></ion-label>
+            <ion-input [(ngModel)]="adresseMail" placeholder="Entrez l'adresse"></ion-input>
+          </ion-item>
+
+          <ion-button color="tertiary" expand="block" (click)="validerAdresse()">
+            <ion-icon slot="start" name="add"></ion-icon>
+            Valider l'adresse mail
+          </ion-button>
+
+
+          <ion-card *ngFor="let item of histoires_recues; let i = index;" (click)="choisirHistoire(i)">
+            <ion-card-title>Histoire numéro {{i+1}}</ion-card-title>
+            {{item.titre}}
+          </ion-card>
+
+
+        </ion-card>
+
 
       </ion-content>
     </div>

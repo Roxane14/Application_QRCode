@@ -6,6 +6,8 @@ import { FirebaseService, Etape, Histoire } from '../FirebaseService';
 import { ToastController } from '@ionic/angular';
 import { stringify } from 'querystring';
 
+import { EmailComposer } from '@ionic-native/email-composer';
+
 @Component({
   selector: 'app-creation',
   templateUrl: './creation.page.html',
@@ -22,14 +24,14 @@ export class CreationPage implements OnInit {
   public nomEtape: string;
   public lieuEtape: string;
 
-  public histoires_recues : Histoire[];
-  public titre1:string = "";
+  public histoires_recues: Histoire[];
+  public titre1: string = "";
 
 
 
 
   ajouterEtape() {
-    if(this.listeEtapes.length==0){
+    if (this.listeEtapes.length == 0) {
       this.etapesExistent = true;
     }
 
@@ -37,9 +39,9 @@ export class CreationPage implements OnInit {
     this.listeEtapes.push(this.etapeTest);
   }
 
-  validerEtape(i:number) {
-    this.listeEtapes[i].lieu=this.lieuEtape;
-    this.listeEtapes[i].nom=this.nomEtape;
+  validerEtape(i: number) {
+    this.listeEtapes[i].lieu = this.lieuEtape;
+    this.listeEtapes[i].nom = this.nomEtape;
     this.nombreEtapes++;
   }
 
@@ -47,8 +49,8 @@ export class CreationPage implements OnInit {
   async createHistoire() {
 
     let i = this.listeEtapes.length;
-    this.listeEtapes[i-1].lieu=this.lieuEtape;
-    this.listeEtapes[i-1].nom=this.nomEtape;
+    this.listeEtapes[i - 1].lieu = this.lieuEtape;
+    this.listeEtapes[i - 1].nom = this.nomEtape;
 
     await this.firebaseService.nouvelleHistoire(this.titreHistoire.toString(), this.nombreEtapes, this.listeEtapes)
       .then(async res => {
@@ -63,7 +65,7 @@ export class CreationPage implements OnInit {
       })
   }
 
-  async afficherHistoires(){
+  async afficherHistoires() {
     this.histoires_recues = await this.firebaseService.lireHistoires();
     this.titre1 = this.histoires_recues[0].titre;
   }
@@ -77,11 +79,42 @@ export class CreationPage implements OnInit {
 
   constructor(
     private afs: AngularFirestore,
-    public toastController: ToastController
+    public toastController: ToastController,
+    private emailComposer: EmailComposer
   ) {
     this.etapesExistent = false;
 
   }
+
+  validerAdresse() {
+
+    this.emailComposer.isAvailable().then((available: boolean) => {
+      if (available) {
+        //Now we know we can send
+      }
+    });
+
+    let email = {
+      to: 'roxane.letensorer@gmail.com',
+      cc: 'erika@mustermann.de',
+      bcc: ['john@doe.com', 'jane@doe.com'],
+      attachments: [
+        'file://img/logo.png',
+        'res://icon.png',
+        'base64:icon.png//iVBORw0KGgoAAAANSUhEUg...',
+        'file://README.pdf'
+      ],
+      subject: 'Cordova Icons',
+      body: 'How are you? Nice greetings from Leipzig',
+      isHtml: true
+    }
+
+    // Send a text message using default options
+    this.emailComposer.open(email);
+
+  }
+
+
 
   ngOnInit() {
   }
