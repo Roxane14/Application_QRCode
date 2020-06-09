@@ -15,11 +15,20 @@ export class JouerPage implements OnInit {
   public histoires_recues: Histoire[];
   _appService = appService.getInstance();  
   mesEtapes1:Etape[] =[];
+  public etapeSuivante: Etape;
+  public valide: Boolean = false;
 
   constructor(
     private afs: AngularFirestore,
     public toastController: ToastController
   ) {
+    this.etapeSuivante = this._appService.getEtapeSuivante();
+    if (this.etapeSuivante == null) {
+      this.valide = false;
+    }
+
+    else {
+      this.valide = true;}
     this.afficherHistoires();
   }
 
@@ -41,6 +50,7 @@ export class JouerPage implements OnInit {
       duration: 3000
     });
     toast.present();
+    this.valide=true;
 
   }
 

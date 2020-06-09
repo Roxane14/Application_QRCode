@@ -1,86 +1,34 @@
-<body>
-  <ion-app>
-    <ion-menu side="start" content-id="main-content">
-      <ion-header>
-        <ion-toolbar translucent>
-          <ion-title>Menu</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content>
-        <ion-list>
-          <ion-item>
-            <ion-icon name="home" slot="start"></ion-icon>
-            <ion-label [routerLink]="['/home']">Accueil</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-icon name="square-outline" slot="start"></ion-icon>
-            <ion-label [routerLink]="['/scan']">Scanner un QRCode</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-icon name="search" slot="start"></ion-icon>
-            <ion-label [routerLink]="['/indices']">Voir tous mes indices</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-icon name="create" slot="start"></ion-icon>
-            <ion-label [routerLink]="['/generation']">Nouveau QRCode</ion-label>
-          </ion-item>
-          <!--<ion-item>
-            <ion-icon name="compass" slot="start"></ion-icon>
-            <ion-label [routerLink]="['/test-menu']">Test Menu</ion-label>
-          </ion-item>-->
-          <ion-item>
-            <ion-icon name="bulb" slot="start"></ion-icon>
-            <ion-label [routerLink]="['/creation']">Création d'histoire</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-icon name="compass" slot="start"></ion-icon>
-            <ion-label [routerLink]="['/jouer']">Choisir une histoire</ion-label>
-          </ion-item>
-        </ion-list>
-      </ion-content>
-    </ion-menu>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title class="titre-page">
+      Mon application
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
 
-    <div class="ion-page" id="main-content">
-      <ion-header [translucent]="true">
-        <ion-toolbar>
-          <ion-buttons slot="start">
-            <ion-menu-button></ion-menu-button>
-          </ion-buttons>
-          <ion-title class="titre-page">
-            Mon application
-          </ion-title>
-        </ion-toolbar>
-      </ion-header>
-
-      <ion-content class="ion-padding">
+<ion-content class="ion-padding">
 
 
-        <div>
+  <div>
 
 
-          <ion-item lines="none">
-            <ion-label><b>Texte à encoder:</b></ion-label>
-            <ion-input [(ngModel)]="textToCode" placeholder="Entrez votre URL"></ion-input>
-          </ion-item>
+    <ion-item lines="none">
+      <ion-label><b>Texte à encoder:</b></ion-label>
+      <ion-input [(ngModel)]="textToCode" placeholder="Entrez votre URL"></ion-input>
+    </ion-item>
 
-          <ion-button color="tertiary" expand="block" (click)="createQRCode()">
-            <ion-icon slot="start" name="create"></ion-icon>
-            Créer un QR Code
-          </ion-button>
+    <ion-button color="tertiary" expand="block" (click)="createQRCode()">
+      <ion-icon slot="start" name="create"></ion-icon>
+      Créer un QR Code
+    </ion-button>
 
-          <div class="center" *ngIf="myAngularxQrCode">
-            <qrcode [qrdata]="myAngularxQrCode" [size]="250" [level]="'M'"></qrcode>
-          </div>
-
-        </div>
-
-      </ion-content>
+    <div class="center" *ngIf="myAngularxQrCode">
+      <qrcode [qrdata]="myAngularxQrCode" [size]="250" [level]="'M'"></qrcode>
     </div>
-  </ion-app>
 
-  <script>
-    async function openMenu() {
-      await menuController.open();
-    }
-  </script>
-</body>
+  </div>
+
+</ion-content>

@@ -74,7 +74,7 @@ export class ScanPage implements OnInit {
 
 
               if (text == this.etapeSuivante.qr.toString()) {
-                this.indice = this.etapeSuivante.lieu;
+                this.indice = this.etapeSuivante.nom;
                 this._appService.add(this.indice);
               }
 

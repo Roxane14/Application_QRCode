@@ -14,21 +14,15 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 })
 export class AppComponent {
 
-  /*monTexte : string;
-  value:string="";*/
-
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar, 
-    private _appService:appService,
   ) {
     this.initializeApp();
   }
 
   ngOnInit():void{
-    //this.value=this._appService.getApp();
-
   }
 
   initializeApp() {
@@ -37,4 +31,5 @@ export class AppComponent {
       this.splashScreen.hide();
     });
   }
+
 }
