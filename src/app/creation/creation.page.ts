@@ -6,8 +6,6 @@ import { FirebaseService, Etape, Histoire } from '../FirebaseService';
 import { ToastController } from '@ionic/angular';
 import { stringify } from 'querystring';
 
-import { EmailComposer } from '@ionic-native/email-composer';
-
 @Component({
   selector: 'app-creation',
   templateUrl: './creation.page.html',
@@ -79,38 +77,18 @@ export class CreationPage implements OnInit {
 
   constructor(
     private afs: AngularFirestore,
-    public toastController: ToastController,
-    private emailComposer: EmailComposer
+    public toastController: ToastController
+   
+    
   ) {
     this.etapesExistent = false;
+    this.afficherHistoires();
+    console.log("constructeur creation");
 
   }
 
   validerAdresse() {
 
-    this.emailComposer.isAvailable().then((available: boolean) => {
-      if (available) {
-        //Now we know we can send
-      }
-    });
-
-    let email = {
-      to: 'roxane.letensorer@gmail.com',
-      cc: 'erika@mustermann.de',
-      bcc: ['john@doe.com', 'jane@doe.com'],
-      attachments: [
-        'file://img/logo.png',
-        'res://icon.png',
-        'base64:icon.png//iVBORw0KGgoAAAANSUhEUg...',
-        'file://README.pdf'
-      ],
-      subject: 'Cordova Icons',
-      body: 'How are you? Nice greetings from Leipzig',
-      isHtml: true
-    }
-
-    // Send a text message using default options
-    this.emailComposer.open(email);
 
   }
 

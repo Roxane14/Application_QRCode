@@ -14,6 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { QRScanner } from '@ionic-native/qr-scanner/ngx';
 //import { IonicStorageModule } from '@ionic/storage';
 
+
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule, AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
