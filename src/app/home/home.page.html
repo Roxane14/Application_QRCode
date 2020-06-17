@@ -47,20 +47,31 @@
             <ion-menu-button></ion-menu-button>
           </ion-buttons>
           <ion-title class="titre-page">
-            Home de mon application
+            Bienvenue
           </ion-title>
         </ion-toolbar>
       </ion-header>
 
       <ion-content class="ion-padding">
+        <h1>
+          Cette application vous permettra de créer vos propres scenarii de jeu. Pour commencer, que voulez-vous faire ?
+        </h1>
+        <br><br>
 
-        <p>Bienvenue ! <br>
-          Voilà le point de départ de votre mission : les clefs de l'ENSIM ont disparu. <br>
-          Vous êtes la seule personne capable de les retrouver. <br>
-          Il vous faudra donc mener l'enquête et parcourir l'ENSIM à leur recherche. <br>
-          Les QRCodes seront vos alliés. </p>
+        <ion-button [routerLink]="['/jouer']">
+          <ion-icon name="play" slot="start"></ion-icon>
+          <p>Jouer à une histoire <br>déjà existante</p>
+        </ion-button>
+        <br><br>
+        <ion-button [routerLink]="['/creation']">
+          <ion-icon name="add" slot="start"></ion-icon>
+          <p>Créer une toute <br>nouvelle histoire</p>
+        </ion-button>
 
       </ion-content>
+
+      
+
     </div>
   </ion-app>
 

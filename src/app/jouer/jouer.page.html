@@ -10,17 +10,20 @@
       </ion-header>
 
       <ion-content class="ion-padding">
+        <h1>
+          Avant de commencer, il vous faut tout d'abord choisir l'histoire à laquelle vous souhaitez jouer :
+        </h1>
+        <br>
 
         <ion-card *ngFor="let item of histoires_recues; let i = index;" (click)="choisirHistoire(i)">
-          <ion-card-title>Histoire numéro {{i+1}}</ion-card-title>
-          {{item.titre}}
+          <ion-card-title>{{i+1}} -- {{item.titre}}</ion-card-title>
+          Point de départ : {{item.etapes[0].lieu}}
         </ion-card>
+        <br>
 
-        <ion-item *ngIf="valide">
-          <ion-label>
-            <ion-label [routerLink]="['/scan']">Vous pouvez dès maintenant <br>commencer à scanner. <br><b>Veuillez appuyer ici !</b></ion-label>
-          </ion-label>
-        </ion-item>
+        <div *ngIf="valide" class="validation">
+            <p [routerLink]="['/scan']">Votre histoire est choisie, vous pouvez dès maintenant commencer à scanner. <br><b>Veuillez appuyer ici !</b></p>
+        </div>
 
 
       </ion-content>
