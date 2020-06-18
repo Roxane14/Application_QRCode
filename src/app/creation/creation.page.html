@@ -12,9 +12,9 @@
 
 <ion-content class="ion-padding">
 
-    <ion-title>Votre nouvelle histoire :</ion-title>
-
-
+  <h1>
+    Vous allez ici pouvoir créer une nouvelle histoire, avec le nombre d'étapes que vous désirez.
+  </h1>
 
     <ion-item lines="none">
       <ion-label><b>Titre de l'histoire :</b></ion-label>
@@ -25,24 +25,29 @@
     <ion-card *ngFor="let item of listeEtapes; let i = index;" >
       <ion-card-title>Étape numéro {{i+1}} :</ion-card-title>
 
-      <ion-item lines="none">
+      <div class = "contenu">
         <ion-label><b>Lieu de l'indice :</b></ion-label>
         <ion-input [(ngModel)]="listeEtapes[i].lieu" placeholder="Entrez le lieu"></ion-input>
-      </ion-item>
+      </div>
 
-      <ion-item lines="none">
-        <ion-label><b>Contenu de l'indice :</b></ion-label>
-        <ion-input [(ngModel)]="listeEtapes[i].nom" placeholder="Entrez le contenu"></ion-input>
-      </ion-item>
+      <!--<ion-item lines="none">
+        <ion-label><b>Contenu de l'indice :</b></ion-label><br>
+        <ion-textarea [(ngModel)]="listeEtapes[i].nom" placeholder="Entrez le contenu"></ion-textarea>
+      </ion-item>-->
+
+      <div class = "contenu">
+        <ion-label><b>Contenu de l'indice :</b></ion-label><br>
+        <ion-textarea [(ngModel)]="listeEtapes[i].nom" placeholder="Entrez le contenu"></ion-textarea>
+      </div>
 
     </ion-card>
 
-    <ion-button color="tertiary" expand="block" (click)="ajouterEtape()">
+    <ion-button (click)="ajouterEtape()" class="boutonAjout">
       <ion-icon slot="start" name="add"></ion-icon>
       Ajouter une étape
     </ion-button>
 
-    <ion-button color="tertiary" expand="block" (click)="createHistoire()" *ngIf="etapesExistent">
+    <ion-button (click)="createHistoire()" *ngIf="etapesExistent" class="boutonValider">
       <ion-icon slot="start" name="checkmark-circle"></ion-icon>
       Valider l'histoire complète
     </ion-button>

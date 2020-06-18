@@ -1,6 +1,56 @@
 .divTermine{
     border:3px solid green;
-  }
+}
 .divEnCours{
     border:1px solid black;
+}
+
+ion-button{  
+  --background: #A0C1B8;
+
+  ion-icon{
+    width: 30px;
+    height: 30px;
+    color:white;
   }
+
+  p{
+    width: 186px;
+    height: 68px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #000000;
+  }
+}
+
+.boutonAjout {
+  --border-radius: 50px;
+
+}
+
+.boutonValider {
+  --background: #726A95;
+  height: 50px;
+  --border-radius: 20px;
+}
+
+ion-card{
+    --background: #d1c9a4;
+}
+
+.contenu, ion-card-title{
+  color: black;
+  padding-left: 5%;
+  padding-top: 5%;
+}
+
+
+  
