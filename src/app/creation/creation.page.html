@@ -10,7 +10,6 @@
 </ion-header>
 
 
-
 <ion-content class="ion-padding">
 
     <ion-title>Votre nouvelle histoire :</ion-title>
@@ -23,23 +22,18 @@
     </ion-item>
 
 
-    <ion-card *ngFor="let item of listeEtapes; let i = index;">
+    <ion-card *ngFor="let item of listeEtapes; let i = index;" >
       <ion-card-title>Étape numéro {{i+1}} :</ion-card-title>
 
       <ion-item lines="none">
         <ion-label><b>Lieu de l'indice :</b></ion-label>
-        <ion-input [(ngModel)]="lieuEtape" placeholder="Entrez le lieu"></ion-input>
+        <ion-input [(ngModel)]="listeEtapes[i].lieu" placeholder="Entrez le lieu"></ion-input>
       </ion-item>
 
       <ion-item lines="none">
         <ion-label><b>Contenu de l'indice :</b></ion-label>
-        <ion-input [(ngModel)]="nomEtape" placeholder="Entrez le contenu"></ion-input>
+        <ion-input [(ngModel)]="listeEtapes[i].nom" placeholder="Entrez le contenu"></ion-input>
       </ion-item>
-
-      <ion-button color="tertiary" expand="block" (click)="validerEtape(i)">
-        <ion-icon slot="start" name="checkmark"></ion-icon>
-        Valider cette étape
-      </ion-button>
 
     </ion-card>
 
@@ -52,6 +46,5 @@
       <ion-icon slot="start" name="checkmark-circle"></ion-icon>
       Valider l'histoire complète
     </ion-button>
-
 
 </ion-content>

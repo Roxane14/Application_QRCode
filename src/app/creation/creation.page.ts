@@ -19,14 +19,6 @@ export class CreationPage implements OnInit {
   public listeEtapes: Etape[] = [];
   public etapesExistent: boolean;
   public etapeTest: Etape;
-  public nomEtape: string;
-  public lieuEtape: string;
-
-  public histoires_recues: Histoire[];
-  public titre1: string = "";
-
-
-
 
   ajouterEtape() {
     if (this.listeEtapes.length == 0) {
@@ -37,18 +29,8 @@ export class CreationPage implements OnInit {
     this.listeEtapes.push(this.etapeTest);
   }
 
-  validerEtape(i: number) {
-    this.listeEtapes[i].lieu = this.lieuEtape;
-    this.listeEtapes[i].nom = this.nomEtape;
-    this.nombreEtapes++;
-  }
-
-
   async createHistoire() {
-
-    let i = this.listeEtapes.length;
-    this.listeEtapes[i - 1].lieu = this.lieuEtape;
-    this.listeEtapes[i - 1].nom = this.nomEtape;
+    this.nombreEtapes = this.listeEtapes.length;
 
     await this.firebaseService.nouvelleHistoire(this.titreHistoire.toString(), this.nombreEtapes, this.listeEtapes)
       .then(async res => {
@@ -63,10 +45,6 @@ export class CreationPage implements OnInit {
       })
   }
 
-  async afficherHistoires() {
-    this.histoires_recues = await this.firebaseService.lireHistoires();
-    this.titre1 = this.histoires_recues[0].titre;
-  }
 
   resetFields() {
     this.titreHistoire = "";
@@ -82,17 +60,7 @@ export class CreationPage implements OnInit {
     
   ) {
     this.etapesExistent = false;
-    this.afficherHistoires();
-    console.log("constructeur creation");
-
   }
-
-  validerAdresse() {
-
-
-  }
-
-
 
   ngOnInit() {
   }
