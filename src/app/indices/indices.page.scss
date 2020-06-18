@@ -1,0 +1,46 @@
+ion-card{
+   // height: 60px;
+  
+    --background: #A0C1B8;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    ion-card-title{
+        width: 186px;
+        height: 68px;
+    
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 40px;
+        line-height: 21px;
+        left : 15px;
+        display: flex;
+        align-items: center;
+        //--text-align: center;
+    
+        color: #000000;
+
+    }
+
+  }
+
+  .validation{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    position: absolute;
+    bottom: 5%;
+
+
+    color: white;
+    background-color: #726A95;
+    border-radius: 26px;
+}

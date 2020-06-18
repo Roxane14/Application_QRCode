@@ -4,6 +4,12 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title class="titre-page">SCAN</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-label [routerLink]="['/indices']">Mes indices</ion-label>
+        <ion-icon name="bulbà"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -12,19 +18,15 @@
     Nouveau scan
   </ion-button>
 
-  <ion-item *ngIf="!valide">
-    <ion-label>
-      <ion-label [routerLink]="['/jouer']">Vous devez choisir une histoire <br>pour commencer à jouer.<br><b>Veuillez appuyer ici !</b></ion-label>
-    </ion-label>
-  </ion-item>
+  <div *ngIf="!valide" class ="validation">
+      <p [routerLink]="['/jouer']">Vous devez choisir une histoire pour commencer à jouer.<br><b>Veuillez appuyer ici !</b></p>
+  </div>
 
-  <ion-content class="ion-padding">
-    <ion-icon name="square-outline" class="frame" [ngClass]="{'frameGreen': scanTermine, 'framePink':!scanTermine}"></ion-icon>
+  <ion-content class="ion-padding" *ngIf="!scanTermine">
+    <ion-icon name="square-outline" [ngClass]="{'frameGreen': scanTermine, 'framePink':!scanTermine}"></ion-icon>
   </ion-content>
 
-  <ion-item *ngIf="scanTermine">
-    <ion-label>
+  <div class="reponse" *ngIf="scanTermine">
       <p>Nouvel indice trouvé :</p>
-      <h2><b>{{ indice }}</b></h2>
-    </ion-label>
-  </ion-item>
+      <h2>{{indice}}</h2>
+  </div>

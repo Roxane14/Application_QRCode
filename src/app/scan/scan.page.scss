@@ -7,21 +7,9 @@
     --ion-background-color: transparent;
     --background: transparent;
   }
-  
-  .frame {
-    color: #d5d5d5;
-    height: 350px;
-    width: 350px;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-  }
 
   .frameGreen{
-    color: green;
+    color: rgb(131, 202, 131);
     height: 350px;
     width: 350px;
     position: absolute;
@@ -32,7 +20,7 @@
     margin: auto;
   }
   .framePink{
-    color: pink;
+    color: rgb(202, 131, 164);
     height: 350px;
     width: 350px;
     position: absolute;
@@ -42,3 +30,57 @@
     bottom: 0;
     margin: auto;
   }
+  ion-card{
+    --background: #A0C1B8;
+}
+
+.validation{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: white;
+    background-color: #726A95;
+    border-radius: 26px;
+}
+ion-button{
+  --background: #A0C1B8;
+}
+ion-buttons{
+  display:flex;
+  flex-direction: row;
+  ion-button{
+    --background: #A0C1B8;
+    display:flex;
+    flex-direction: row;
+  }
+}
+
+.reponse{
+  background:#A0C1B8;
+}
+
+p{
+  font-family: Roboto;
+  font-style: italic;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 21px;
+}
+
+h2{
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 21px;
+  display: flex;
+  align-items: center;
+  text-align: justify;
+  margin: 5%;
+}
