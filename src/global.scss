@@ -28,18 +28,22 @@
 
 ion-content{
     --background: #F4EBC1;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    
     h1{
-
-      font-family: Roboto;
-      font-style: normal;
-      font-weight: normal;
       font-size: 18px;
       line-height: 21px;
       display: flex;
       align-items: center;
       text-align: center;
-    
-      color: #000000;
+    p{
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+    }
     
     
     }

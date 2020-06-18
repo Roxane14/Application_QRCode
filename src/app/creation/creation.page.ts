@@ -19,6 +19,7 @@ export class CreationPage implements OnInit {
   public listeEtapes: Etape[] = [];
   public etapesExistent: boolean;
   public etapeTest: Etape;
+  public attente:boolean;
 
   ajouterEtape() {
     if (this.listeEtapes.length == 0) {
@@ -30,6 +31,7 @@ export class CreationPage implements OnInit {
   }
 
   async createHistoire() {
+    this.attente=true;
     this.nombreEtapes = this.listeEtapes.length;
 
     await this.firebaseService.nouvelleHistoire(this.titreHistoire.toString(), this.nombreEtapes, this.listeEtapes)
@@ -40,6 +42,7 @@ export class CreationPage implements OnInit {
         });
         toast.present();
         this.resetFields();
+        this.attente=false;
       }, err => {
         console.log(err)
       })
@@ -60,6 +63,7 @@ export class CreationPage implements OnInit {
     
   ) {
     this.etapesExistent = false;
+    this.attente = false;
   }
 
   ngOnInit() {

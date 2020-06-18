@@ -13,6 +13,12 @@
         <h1>
           Avant de commencer, il vous faut tout d'abord choisir l'histoire à laquelle vous souhaitez jouer :
         </h1>
+        <p *ngIf="histoires_recues==null" class="chargement">
+          <ion-spinner name="lines"></ion-spinner><br>
+          <i>Veuillez patienter, les histoires sont en cours de chargement...</i>
+          
+        </p>
+        
         <br>
 
         <ion-card *ngFor="let item of histoires_recues; let i = index;" (click)="choisirHistoire(i)">

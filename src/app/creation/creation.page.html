@@ -42,7 +42,7 @@
 
     </ion-card>
 
-    <ion-button (click)="ajouterEtape()" class="boutonAjout">
+    <ion-button (click)="ajouterEtape()" class="boutonAjout" *ngIf="titreHistoire!=null">
       <ion-icon slot="start" name="add"></ion-icon>
       Ajouter une étape
     </ion-button>
@@ -51,5 +51,10 @@
       <ion-icon slot="start" name="checkmark-circle"></ion-icon>
       Valider l'histoire complète
     </ion-button>
+    <p *ngIf="attente" class="chargement">
+      <ion-spinner name="lines"></ion-spinner><br>
+      <i>Veuillez patienter, votre histoire est en cours d'enregistrement...</i>
+      
+    </p>
 
 </ion-content>
