@@ -20,6 +20,7 @@ export class CreationPage implements OnInit {
   public etapesExistent: boolean;
   public etapeTest: Etape;
   public attente:boolean;
+  public champsRemplis:boolean = true;
 
   ajouterEtape() {
     if (this.listeEtapes.length == 0) {
@@ -31,21 +32,33 @@ export class CreationPage implements OnInit {
   }
 
   async createHistoire() {
-    this.attente=true;
+    this.champsRemplis=true;
     this.nombreEtapes = this.listeEtapes.length;
+    for(let i=0;i<this.nombreEtapes;i++){
+      if((this.listeEtapes[i].lieu==null)||(this.listeEtapes[i].nom==null)){
+        this.champsRemplis=false;
+      }
+    }
 
-    await this.firebaseService.nouvelleHistoire(this.titreHistoire.toString(), this.nombreEtapes, this.listeEtapes)
-      .then(async res => {
-        let toast = await this.toastController.create({
-          message: 'Vous avez bien créé votre histoire. Félicitations.',
-          duration: 3000
-        });
-        toast.present();
-        this.resetFields();
-        this.attente=false;
-      }, err => {
-        console.log(err)
-      })
+    if(this.champsRemplis){
+      this.attente=true;
+
+      await this.firebaseService.nouvelleHistoire(this.titreHistoire.toString(), this.nombreEtapes, this.listeEtapes)
+        .then(async res => {
+          let toast = await this.toastController.create({
+            message: 'Vous avez bien créé votre histoire. Félicitations.',
+            duration: 3000
+          });
+          toast.present();
+          this.resetFields();
+          this.attente=false;
+        }, err => {
+          console.log(err)
+        })
+      
+    }
+    
+    
   }
 
 

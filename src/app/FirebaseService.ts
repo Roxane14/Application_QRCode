@@ -29,11 +29,7 @@ export class FirebaseService {
 
   async nouvelleHistoire(titre: string, nombre: number, etapes: Etape[]) {
 
-    console.log("avant lire histoire :"+this.reference);
-
     await this.lireHistoires();
-
-    console.log("après lire histoire :"+this.reference);
 
     return new Promise<any>((resolve, reject) => {
       this.afs.collection('/histoires').doc(this.reference.toString()).set({
@@ -74,7 +70,6 @@ export class FirebaseService {
     this.i=0;
 
         while(this.ok){
-        console.log(this.i);
         this.i++;
 
         let docRef = await this.afs.collection('/histoires/').doc(this.i.toString()).get().toPromise()
@@ -84,7 +79,6 @@ export class FirebaseService {
               this.ok=false;
               this.reference=this.i;
             } else {
-              console.log('Document data:', doc.data());
               this.document = doc.data();
               this.histoire_tampon = new Histoire();
               this.histoire_tampon.titre = this.document.Titre;
@@ -97,7 +91,6 @@ export class FirebaseService {
                   if (!doc.exists) {
                     console.log('No such sub-document');
                   } else {
-                    console.log('Document data:', doc.data());
                     this.document = doc.data();
 
                     this.etape_tampon = new Etape();

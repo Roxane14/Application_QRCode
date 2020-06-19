@@ -72,3 +72,24 @@ ion-title{
   ion-toolbar{
     --background: #709FB0;
   }
+  ion-footer{
+    background: #F4EBC1;
+    //color : pink;
+  }
+
+  ion-thumbnail {
+    min-width: 10%;    
+    min-height: 10%;
+    
+  }
+  
+  ion-footer ion-item p{
+    font-family: Roboto;
+    font-style: italic;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    text-align: left;
+  }

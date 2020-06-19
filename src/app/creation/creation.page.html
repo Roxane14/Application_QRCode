@@ -51,10 +51,24 @@
       <ion-icon slot="start" name="checkmark-circle"></ion-icon>
       Valider l'histoire complète
     </ion-button>
+
     <p *ngIf="attente" class="chargement">
       <ion-spinner name="lines"></ion-spinner><br>
       <i>Veuillez patienter, votre histoire est en cours d'enregistrement...</i>
-      
+    </p>
+
+    <p *ngIf="!champsRemplis" class="chargement">
+      <i>Erreur, tous les champs ne sont pas remplis !</i>
     </p>
 
 </ion-content>
+
+<ion-footer >
+  <ion-item>
+    <ion-thumbnail slot="end">
+      <ion-img src="../assets/ecrire.png"></ion-img>
+    </ion-thumbnail>
+    <p>Une enquête est constituée de plusieurs indices : chaque indice doit mener vers le suivant.</p>
+  </ion-item>
+</ion-footer>
+
